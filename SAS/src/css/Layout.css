@@ -1,0 +1,261 @@
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  scroll-snap-align: start;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #282c34;
+  padding: 1%; /* Use percentage instead of pixels */
+  color: white;
+  text-align: center;
+  width: 100vw; /* Use viewport width to ensure it occupies full browser width */
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  text-align: left;
+  font-size: 1.5em;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+}
+
+nav {
+  width: 70%;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Added to ensure no margin as well */
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+nav ul li {
+  margin: 0 0.5%; /* Reduce spacing between items */
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  display: block;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: fixed;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1002;
+  background-color: rgba(40, 44, 52, 0.6);
+  border-radius: 50%;
+  padding: 1%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease, background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-toggle.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-toggle:hover {
+  background-color: rgba(40, 44, 52, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.mobile-toggle span {
+  height: 6px;
+  width: 6px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin: 2px auto;
+  display: block;
+}
+
+.mobile-toggle span:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+main {
+  flex: 1;
+  padding: 1%; /* Use percentage instead of pixels */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1% 2%; /* Use percentage instead of pixels */
+  width: 100vw; /* Use viewport width to ensure it occupies full browser width */
+  box-sizing: border-box;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: row; /* Change to row to place items side by side */
+  align-items: center;
+  width: 35%;
+}
+
+.footer-info p {
+  margin: 0 2% 0 0; /* Add right margin for spacing between items */
+}
+
+.social-media {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.social-media a {
+  margin-left: 1%; /* Use percentage instead of pixels */
+}
+
+.social-media img {
+  width: 2.4%; /* Use percentage instead of pixels */
+  height: 2.4%; /* Use percentage instead of pixels */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  header, footer {
+    padding: 1%; /* Use percentage instead of pixels */
+  }
+
+  .header-container {
+    justify-content: center; /* Center the header items in mobile view */
+    flex-direction: column; /* Stack items vertically */
+  }
+  
+  .header-container > div {
+    margin-bottom: 2%; /* Add space between logo and nav in mobile view */
+    text-align: center; /* Center the text/logo */
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+  
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 60%;
+    height: 100vh;
+    background-color: #282c34;
+    transition: all 0.5s ease;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  nav.active {
+    right: 0;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0; /* Remove top padding explicitly for mobile view */
+    height: 100%;
+  }
+  
+  nav ul li {
+    margin: 1.5% 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul li a {
+    padding: 1em;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-end; /* Align items to the right in mobile view */
+  }
+
+  nav ul li {
+    margin: 0.5% 0; /* Use percentage instead of pixels */
+  }
+
+  .footer-info {
+    flex-direction: row; /* Keep row direction even on mobile */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping if needed on very small screens */
+  }
+
+  .footer-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-media {
+    justify-content: center;
+    margin-top: 1%; /* Use percentage instead of pixels */
+  }
+}

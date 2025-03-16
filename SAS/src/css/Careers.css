@@ -1,0 +1,64 @@
+.careers-container {
+  padding: 2%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.careers-container h1 {
+  color: #282c34;
+  margin-bottom: 2%;
+}
+
+.job-listings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+}
+
+.job-card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 2%;
+  margin-bottom: 2%;
+  width: 48%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h2 {
+  color: #282c34;
+  margin-bottom: 1%;
+}
+
+.job-card p {
+  margin-bottom: 1%;
+}
+
+.job-card ul {
+  margin: 1% 0;
+  padding-left: 2%;
+}
+
+.job-card li {
+  margin-bottom: 0.5%;
+}
+
+.apply-btn {
+  background-color: #282c34;
+  color: white;
+  border: none;
+  padding: 1% 2%;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1%;
+  transition: background-color 0.3s ease;
+}
+
+.apply-btn:hover {
+  background-color: #3e4451;
+}
+
+@media (max-width: 768px) {
+  .job-card {
+    width: 100%;
+  }
+}
