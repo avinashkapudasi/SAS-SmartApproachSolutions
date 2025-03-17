@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './css/Layout.css';
 
 const Layout = ({ children }) => {
@@ -8,6 +8,7 @@ const Layout = ({ children }) => {
   const scrollTimerRef = useRef(null);
   const navRef = useRef(null);
   const toggleRef = useRef(null);
+  const location = useLocation();
 
   // Handle scroll events to show/hide toggle button
   useEffect(() => {
@@ -63,6 +64,68 @@ const Layout = ({ children }) => {
     }
   };
 
+  // Handle smooth scrolling to sections with improved mobile support
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    
+    // If we're not on home page, navigate there first
+    if (location.pathname !== '/') {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
+    // Close mobile menu
+    setIsMenuOpen(false);
+    
+    // Add a slight delay to ensure the mobile menu closes before scrolling
+    setTimeout(() => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        // Get header height to adjust scroll position
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        // Check if we're on mobile
+        const isMobile = window.innerWidth <= 768;
+        // Add extra offset for mobile to account for the header height differences
+        const mobileOffset = isMobile ? 20 : 0;
+        
+        const targetPosition = section.offsetTop - headerHeight - mobileOffset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update URL without page reload
+        window.history.pushState(null, '', `#${sectionId}`);
+      }
+    }, 300); // Wait for menu transition
+  };
+
+  // Scroll to section on page load if URL has hash
+  useEffect(() => {
+    if (location.hash && location.pathname === '/') {
+      const sectionId = location.hash.substring(1); // Remove the # character
+      
+      // Small timeout to ensure DOM is fully loaded
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.offsetHeight : 0;
+          
+          const targetPosition = section.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, [location]);
+
   return (
     <div className="layout">
       <header>
@@ -72,13 +135,12 @@ const Layout = ({ children }) => {
           </div>
           <nav ref={navRef} className={isMenuOpen ? 'active' : ''}>
             <ul>
-              <li><a href="/#home">Home</a></li>
-              <li><a href="/#about">About Us</a></li>
-              <li><a href="/#services">Services</a></li>
-              <li><a href="/#testimonials">Testimonials</a></li>
-              <li><a href="/#team">Our Team</a></li>
+              <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>Home</a></li>
+              <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About Us</a></li>
+              <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>Services</a></li>
+              <li><a href="#team" onClick={(e) => scrollToSection(e, 'team')}>Our Team</a></li>
               <li><Link to="/careers">Careers</Link></li>
-              <li><a href="/#contact">Contact Us</a></li>
+              <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact Us</a></li>
             </ul>
           </nav>
         </div>
