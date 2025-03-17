@@ -105,7 +105,7 @@ const ContactUs = () => {
           <iframe
             src={contactDetails.mapLocation}
             width="100%"
-            height="450"
+            height="100%"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
