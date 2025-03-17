@@ -78,7 +78,7 @@ const Layout = ({ children }) => {
               <li><a href="/#testimonials">Testimonials</a></li>
               <li><a href="/#team">Our Team</a></li>
               <li><Link to="/careers">Careers</Link></li>
-              <li><a href="/#contact">Contact Us</a></li>
+              <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </nav>
         </div>

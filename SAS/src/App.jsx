@@ -2,6 +2,8 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
 import Careers from './components/Careers'
+import ContactUs from './components/ContactUs'
+import Loader from './components/Common/Loader/Loader'
 
 function App() {
   return (
@@ -44,7 +46,16 @@ function App() {
             <Careers />
           </Layout>
         } />
+
+    <Route path="/contact" element={
+          <Layout>
+           <ContactUs />
+          </Layout>
+        } />
+
+
       </Routes>
+      
     </Router>
   )
 }

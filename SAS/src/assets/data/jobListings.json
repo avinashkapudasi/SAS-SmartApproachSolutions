@@ -1,0 +1,24 @@
+{
+    "jobs": [
+      {
+        "title": "Software Developer",
+        "description": "We're looking for talented developers to join our team.",
+        "requirements": [
+          "5+ years experience with React",
+          "Strong understanding of front-end technologies",
+          "Experience with RESTful APIs"
+        ],
+        "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeLBjfuhEreSfHlwNuXHqXticj6ULV0QT21LfACiczr4zq49g/viewform?embedded=true"
+      },
+      {
+        "title": "UX Designer",
+        "description": "Help us create beautiful and intuitive user experiences.",
+        "requirements": [
+          "3+ years experience in UX design",
+          "Proficiency with design tools like Figma or Adobe XD",
+          "Strong portfolio showcasing previous work"
+        ],
+        "formUrl": "https://forms.gle/your-ux-designer-form-url"
+      }
+    ]
+  }
