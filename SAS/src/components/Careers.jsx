@@ -1,34 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ApplicationModal from './ApplicationModal';
+import jobListingsData from '../assets/data/jobListings.json';
+import { JobListing } from '../types/JobListing';
 
 const Careers = () => {
+  const [showForm, setShowForm] = useState(null);
+  const jobListings = JobListing.fromJSONArray(jobListingsData.jobs);
+
+  const handleApply = (formUrl) => {
+    setShowForm(formUrl);
+  };
+
   return (
     <div className="careers-container">
       <h1>Careers</h1>
       <p>Join our team and be part of something great!</p>
       
       <div className="job-listings">
-        <div className="job-card">
-          <h2>Software Developer</h2>
-          <p>We're looking for talented developers to join our team.</p>
-          <ul>
-            <li>5+ years experience with React</li>
-            <li>Strong understanding of front-end technologies</li>
-            <li>Experience with RESTful APIs</li>
-          </ul>
-          <button className="apply-btn">Apply Now</button>
-        </div>
-        
-        <div className="job-card">
-          <h2>UX Designer</h2>
-          <p>Help us create beautiful and intuitive user experiences.</p>
-          <ul>
-            <li>3+ years experience in UX design</li>
-            <li>Proficiency with design tools like Figma or Adobe XD</li>
-            <li>Strong portfolio showcasing previous work</li>
-          </ul>
-          <button className="apply-btn">Apply Now</button>
-        </div>
+        {jobListings.map((job, index) => (
+          <div className="job-card" key={index}>
+            <h2>{job.title}</h2>
+            <p>{job.description}</p>
+            <ul>
+              {job.requirements.map((req, reqIndex) => (
+                <li key={reqIndex}>{req}</li>
+              ))}
+            </ul>
+            <button 
+              className="apply-btn" 
+              onClick={() => handleApply(job.formUrl)}
+            >
+              Apply Now
+            </button>
+          </div>
+        ))}
       </div>
+
+      {showForm && (
+        <ApplicationModal 
+          formUrl={showForm} 
+          onClose={() => setShowForm(null)} 
+        />
+      )}
     </div>
   );
 };

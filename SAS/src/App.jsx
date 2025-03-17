@@ -11,6 +11,8 @@ import {
   faVideo, faSms 
 } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import ContactUs from './components/ContactUs'
+import Loader from './components/Common/Loader/Loader'
 
 function App() {
   // Set document title (moved from index.html)
@@ -175,6 +177,13 @@ function App() {
                 </div>
               </div>
             </section>
+        <section id="career">
+        <Careers />
+        </section>
+        <section id="contact">
+        <ContactUs />
+        </section>
+
           </Layout>
         } />
         <Route path="/careers" element={
@@ -182,7 +191,16 @@ function App() {
             <Careers />
           </Layout>
         } />
+        
+    <Route path="/contact" element={
+          <Layout>
+           <ContactUs />
+          </Layout>
+        } />
+
+
       </Routes>
+      
     </Router>
   )
 }

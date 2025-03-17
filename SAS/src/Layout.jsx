@@ -139,8 +139,9 @@ const Layout = ({ children }) => {
               <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About Us</a></li>
               <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>Services</a></li>
               <li><a href="#team" onClick={(e) => scrollToSection(e, 'team')}>Our Team</a></li>
-              <li><Link to="/careers">Careers</Link></li>
+              <li><a href="#career" onClick={(e) => scrollToSection(e, 'career')}>Careers</a></li>
               <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact Us</a></li>
+              {/* <li><Link to="/contact">Contact Us</Link></li> */}
             </ul>
           </nav>
         </div>

@@ -1,0 +1,93 @@
+.contactContainer {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+  }
+  
+  .contactGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+  
+  .contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .infoCard {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+  
+  .infoCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .infoCard h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+  }
+  
+  .infoCard p, 
+  .infoCard a {
+    margin: 0;
+    color: #666;
+    text-decoration: none;
+  }
+  
+  .infoCard a:hover {
+    color: #007bff;
+  }
+  
+  .mapContainer {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .contactGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .contactContainer {
+      padding: 2rem 1rem;
+    }
+  }
+
+  .loaderWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+  }
+  
+  .mapLoader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 1;
+  }
+  
+  .mapContainer {
+    position: relative;
+  }
