@@ -1,13 +1,14 @@
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* Remove snap scrolling which can make transitions feel abrupt */
+  scroll-snap-type: none; 
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
 body {
-  scroll-snap-align: start;
+  /* Remove snap align for smoother scrolling */
   margin: 0;
   padding: 0;
   width: 100%;
@@ -105,7 +106,7 @@ nav ul li a:hover {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.8s ease, visibility 0.8s ease, background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 1% rgba(0, 0, 0, 0.2); /* Changed from 10px to % */
 }
 
 .mobile-toggle.visible {
@@ -119,12 +120,12 @@ nav ul li a:hover {
 }
 
 .mobile-toggle span {
-  height: 6px;
-  width: 6px;
+  height: 0.4em; /* Changed from 6px to em */
+  width: 0.4em; /* Changed from 6px to em */
   background-color: white;
   border-radius: 50%;
   transition: all 0.3s ease;
-  margin: 2px auto;
+  margin: 0.15em auto; /* Changed from 2px to em */
   display: block;
 }
 
@@ -214,7 +215,7 @@ footer {
     height: 100vh;
     background-color: #282c34;
     transition: all 0.3s ease; /* Slightly faster transition */
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: -0.2% 0 0.5% rgba(0, 0, 0, 0.2); /* Changed from -2px to % */
     z-index: 1000;
   }
   
@@ -267,10 +268,13 @@ footer {
 
   /* Adjust scroll margin for mobile views */
   section {
-    scroll-margin-top: 120px; /* Increased value for mobile to account for the larger header */
+    scroll-margin-top: 15%; /* Changed from 120px to % of viewport height */
   }
 }
 
+/* Add smooth transition for section visibility */
 section {
-  scroll-margin-top: 80px; /* Adjust this value based on your header height */
+  scroll-margin-top: 5%; /* Changed from 80px to % */
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-out;
+  will-change: opacity, transform;
 }

@@ -10,7 +10,6 @@ const Layout = ({ children }) => {
   const toggleRef = useRef(null);
   const location = useLocation();
 
-  // Handle scroll events to show/hide toggle button
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(true);
@@ -64,7 +63,7 @@ const Layout = ({ children }) => {
     }
   };
 
-  // Handle smooth scrolling to sections with improved mobile support
+  // Handle smooth scrolling to sections with improved performance
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
     
@@ -77,30 +76,45 @@ const Layout = ({ children }) => {
     // Close mobile menu
     setIsMenuOpen(false);
     
-    // Add a slight delay to ensure the mobile menu closes before scrolling
-    setTimeout(() => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        // Get header height to adjust scroll position
-        const header = document.querySelector('header');
-        const headerHeight = header ? header.offsetHeight : 0;
+    // Immediate execution for better responsiveness - reduced delay
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Get header height to adjust scroll position
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 0;
+      
+      // Check if we're on mobile
+      const isMobile = window.innerWidth <= 768;
+      // Add extra offset for mobile to account for the header height differences
+      const mobileOffset = isMobile ? 20 : 0;
+      
+      const targetPosition = section.offsetTop - headerHeight - mobileOffset;
+      
+      // Simplified, more performant animation
+      const duration = 400; // Reduce duration for snappier scrolling
+      const startPosition = window.scrollY || window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const startTime = performance.now();
+      
+      function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
         
-        // Check if we're on mobile
-        const isMobile = window.innerWidth <= 768;
-        // Add extra offset for mobile to account for the header height differences
-        const mobileOffset = isMobile ? 20 : 0;
+        // Simple easeOutQuad for better performance
+        const easeProgress = 1 - (1 - progress) * (1 - progress);
         
-        const targetPosition = section.offsetTop - headerHeight - mobileOffset;
+        window.scrollTo(0, startPosition + distance * easeProgress);
         
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-        
-        // Update URL without page reload
-        window.history.pushState(null, '', `#${sectionId}`);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          // Update URL without page reload
+          window.history.pushState(null, '', `#${sectionId}`);
+        }
       }
-    }, 300); // Wait for menu transition
+      
+      window.requestAnimationFrame(step);
+    }
   };
 
   // Scroll to section on page load if URL has hash
@@ -139,7 +153,7 @@ const Layout = ({ children }) => {
               <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About Us</a></li>
               <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>Services</a></li>
               <li><a href="#team" onClick={(e) => scrollToSection(e, 'team')}>Our Team</a></li>
-              <li><a href="#career" onClick={(e) => scrollToSection(e, 'career')}>Careers</a></li>
+              <li><Link to="/careers">Careers</Link></li>
               <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact Us</a></li>
               {/* <li><Link to="/contact">Contact Us</Link></li> */}
             </ul>
@@ -150,7 +164,7 @@ const Layout = ({ children }) => {
       {/* Fixed toggle button on the right side */}
       <div 
         ref={toggleRef}
-        className={`mobile-toggle ${isScrolled || isMenuOpen ? 'visible' : ''}`} 
+        className={`mobile-toggle ${isScrolled || isMenuOpen ? 'visible' : ''} ${isMenuOpen ? 'hide' : ''}`} 
         onClick={toggleMenu}
       >
         <span></span>

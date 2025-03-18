@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './Layout'
 import Careers from './components/Careers'
 import homeImage from './assets/home.jpeg' 
@@ -15,15 +15,8 @@ import ContactUs from './components/ContactUs'
 import Loader from './components/Common/Loader/Loader'
 
 function App() {
-  // Set document title (moved from index.html)
   useEffect(() => {
     document.title = "Smart Approach Solutions";
-    
-    // You could also set a favicon programmatically
-    // const link = document.querySelector("link[rel~='icon']");
-    // if (link) {
-    //   link.href = "/your-custom-favicon.ico";
-    // }
   }, []);
 
   return (
@@ -177,13 +170,10 @@ function App() {
                 </div>
               </div>
             </section>
-        <section id="career">
-        <Careers />
-        </section>
-        <section id="contact">
-        <ContactUs />
-        </section>
-
+            <section id="contact">
+              <h2>Contact Us</h2>
+              <ContactUs />
+            </section>
           </Layout>
         } />
         <Route path="/careers" element={
@@ -197,8 +187,8 @@ function App() {
            <ContactUs />
           </Layout>
         } />
-
-
+        
+        <Route path="/career" element={<Navigate to="/careers" replace />} />
       </Routes>
       
     </Router>

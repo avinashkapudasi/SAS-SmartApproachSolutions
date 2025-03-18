@@ -1,9 +1,3 @@
-// import React from 'react';
-// import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-// import styles from '../css/ContactUs.module.css';
-// import contactData from '../assets/data/contactDetails.json';
-// import { ContactDetails } from '../types/ContactDetails';
-
 import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import styles from '../css/ContactUs.module.css';
@@ -13,9 +7,6 @@ import Loader from './Common/Loader/Loader';
 
 
 const ContactUs = () => {
-//   const contactDetails = ContactDetails.fromJSON(contactData);
-//   const primaryContact = contactDetails.getPrimaryContact();
-
 
   const [isLoading, setIsLoading] = useState(true);
   const [mapLoading, setMapLoading] = useState(true);
@@ -48,9 +39,6 @@ const ContactUs = () => {
 
   return (
     <div className={styles.contactContainer}>
-      <h1>Contact Us</h1>
-      <p className={styles.subtitle}>Get in touch with us</p>
-
       <div className={styles.contactGrid}>
         <div className={styles.contactInfo}>
           <div className={styles.infoCard}>
