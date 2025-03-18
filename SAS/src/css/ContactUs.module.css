@@ -15,12 +15,14 @@
     grid-template-columns: 1fr 1fr;
     gap: 3%;
     margin-top: 2%;
+    margin-right: 5%;
 }
   
 .contactInfo {
     display: flex;
     flex-direction: column;
     gap: 2%;
+    margin-bottom: 2.5%;
 }
   
 /* Updated infoCard styling to match block styling */
@@ -79,7 +81,8 @@
     overflow: hidden;
     box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 3%;
+    margin-top: 5%;
+    margin-bottom: 3%;
 }
 
 .mapContainer:hover {

@@ -84,7 +84,7 @@ const ContactUs = () => {
           </div>
         </div>
 
-        <div className={styles.mapContainer}>
+        <div className="team-member">
         {mapLoading && (
             <div className={styles.mapLoader}>
               <Loader size={40} />

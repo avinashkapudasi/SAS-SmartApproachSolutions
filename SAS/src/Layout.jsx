@@ -4,30 +4,68 @@ import './css/Layout.css';
 
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // Removed unused isScrolled state
+  const [isInHomeSection, setIsInHomeSection] = useState(true); // Add state for home section
   const scrollTimerRef = useRef(null);
   const navRef = useRef(null);
   const toggleRef = useRef(null);
   const location = useLocation();
+  const isMobile = useRef(window.innerWidth <= 768);
+
+  // Check if we're on mobile
+  useEffect(() => {
+    const handleResize = () => {
+      isMobile.current = window.innerWidth <= 768;
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Add header height measurement on initial render
+  useEffect(() => {
+    // Measure header height and set it as a CSS variable
+    const header = document.querySelector('header');
+    if (header) {
+      const headerHeight = header.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    }
+    
+    // Existing code for handleScroll...
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(true);
-      
       // Clear any existing timer
       if (scrollTimerRef.current) {
         clearTimeout(scrollTimerRef.current);
       }
       
-      // Set a new timer to hide the toggle after 4 seconds of no scrolling
+      // Check if we're in the home section - now for all devices, not just mobile
+      const homeSection = document.getElementById('home');
+      const aboutSection = document.getElementById('about');
+      
+      if (homeSection && aboutSection) {
+        // Get the position of the about section relative to the viewport
+        const aboutRect = aboutSection.getBoundingClientRect();
+        // If the top of about section is close to entering the viewport, show the header
+        const isAboutVisible = aboutRect.top <= window.innerHeight * 0.9;
+        
+        // We're in the home section if we've not yet reached the about section
+        setIsInHomeSection(!isAboutVisible);
+      }
+      
+      // Set a new timer to hide the toggle after 2 seconds of no scrolling
       scrollTimerRef.current = setTimeout(() => {
         if (!isMenuOpen) {
-          setIsScrolled(false);
+          // Removed unused setIsScrolled
         }
       }, 2000);
     };
 
     window.addEventListener('scroll', handleScroll);
+    
+    // Run once to set initial state
+    handleScroll();
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -59,7 +97,7 @@ const Layout = ({ children }) => {
     setIsMenuOpen(!isMenuOpen);
     // Keep toggle button visible when menu is open
     if (!isMenuOpen) {
-      setIsScrolled(true);
+      // Removed unused setIsScrolled
     }
   };
 
@@ -142,7 +180,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className="layout">
-      <header>
+      <header className={isInHomeSection ? 'hide-header' : ''}>
         <div className="header-container">
           <div>
             <Link to="/">My Website</Link>
@@ -161,10 +199,11 @@ const Layout = ({ children }) => {
         </div>
       </header>
       
-      {/* Fixed toggle button on the right side */}
+      {/* Fixed toggle button that disappears completely when nav is active */}
       <div 
         ref={toggleRef}
-        className={`mobile-toggle ${isScrolled || isMenuOpen ? 'visible' : ''} ${isMenuOpen ? 'hide' : ''}`} 
+        className={`mobile-toggle ${isMenuOpen ? 'hide' : ''} ${isInHomeSection ? 'in-home' : ''}`}
+        style={{ display: isMenuOpen ? 'none' : 'flex' }} /* Added inline style for immediate response */
         onClick={toggleMenu}
       >
         <span></span>
@@ -177,18 +216,7 @@ const Layout = ({ children }) => {
       </main>
       <footer>
         <div className="footer-info">
-          <p>Email: example@example.com | Mobile: +1234567890</p>
-        </div>
-        <div className="social-media">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/facebook-icon.svg" alt="Facebook" />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/twitter-icon.svg" alt="Twitter" />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <img src="/assets/linkedin-icon.svg" alt="LinkedIn" />
-          </a>
+          <p>© Copyright 2025 Prime | All Rights Reserved.</p>
         </div>
       </footer>
     </div>

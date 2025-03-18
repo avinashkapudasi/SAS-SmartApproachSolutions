@@ -31,6 +31,7 @@ function App() {
                 className="home-background-image" 
               />
               <div className="home-content">
+                <h1>Welcome to SAS</h1>
               </div>
             </section>
             <section id="about">

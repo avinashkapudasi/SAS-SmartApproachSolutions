@@ -37,6 +37,19 @@ header {
   position: sticky; /* Make header sticky */
   top: 0;
   z-index: 1000;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+}
+
+/* New class to hide header when in home section on mobile */
+.hide-header {
+  transform: translateY(-100%);
+  opacity: 0;
+  height: 0; /* Add height: 0 to collapse the space */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  overflow: hidden; /* Hide overflow content */
 }
 
 .header-container {
@@ -89,6 +102,7 @@ nav ul li a:hover {
 }
 
 .mobile-toggle {
+  /* Hide the toggle button by default (non-mobile) */
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -103,20 +117,43 @@ nav ul li a:hover {
   background-color: rgba(40, 44, 52, 0.6);
   border-radius: 50%;
   padding: 1%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.8s ease, visibility 0.8s ease, background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 1% rgba(0, 0, 0, 0.2); /* Changed from 10px to % */
-}
-
-.mobile-toggle.visible {
-  opacity: 1;
+  opacity: 0.6; /* Make it slightly visible by default */
   visibility: visible;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
 }
 
+/* Special styling when in home section - more transparent but still visible */
+.mobile-toggle.in-home {
+  opacity: 0.4;
+  background-color: rgba(40, 44, 52, 0.4);
+}
+
+/* Hover effect for toggle button */
 .mobile-toggle:hover {
+  opacity: 1;
   background-color: rgba(40, 44, 52, 0.9);
   transform: translateY(-50%) scale(1.1);
+}
+
+/* Hide toggle button when nav is active to avoid confusion */
+.mobile-toggle.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Hide toggle button when nav is active - make sure this is applied immediately */
+.mobile-toggle.hide {
+  opacity: 0 !important; /* Added !important to override any other styles */
+  visibility: hidden !important;
+  transition: opacity 0.1s ease, visibility 0.1s ease; /* Faster transition when hiding */
+  pointer-events: none; /* Make sure it can't be clicked when hidden */
+  transform: scale(0); /* Add extra transform to ensure it's really gone */
+}
+
+/* Make sure this is below any hover styles to take precedence */
+nav.active + .mobile-toggle {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .mobile-toggle span {
@@ -148,14 +185,14 @@ main {
 
 footer {
   background-color: #282c34;
-  color: white;
+  color: rgba(255, 255, 255, 0.7); /* Made text semi-transparent */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1% 2%; /* Use percentage instead of pixels */
-  width: 100vw; /* Use viewport width to ensure it occupies full browser width */
+  padding: 0.8% 2%; /* Slightly reduced vertical padding */
+  width: 100%;
   box-sizing: border-box;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-wrap: wrap;
   left: 0;
   right: 0;
   margin-left: 0;
@@ -166,11 +203,14 @@ footer {
   display: flex;
   flex-direction: row; /* Change to row to place items side by side */
   align-items: center;
-  width: 35%;
+  width: 100%;
+  justify-content: center; /* Center the text */
 }
 
 .footer-info p {
   margin: 0 2% 0 0; /* Add right margin for spacing between items */
+  font-size: 0.85em; /* Made text smaller */
+  letter-spacing: 0.02em; /* Slight letter spacing for elegance */
 }
 
 .social-media {
@@ -204,41 +244,78 @@ footer {
   }
 
   .mobile-toggle {
-    display: flex;
+    display: flex; /* Always show on mobile */
+    visibility: visible;
   }
   
+  /* Make nav auto-show when hovering toggle button */
+  .mobile-toggle:hover + nav,
+  nav:hover {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+
   nav {
     position: fixed;
-    top: 0;
+    top: 50%; /* Match toggle button positioning */
+    transform: translateY(50%); /* Match toggle button transform */
     right: -100%;
-    width: 60%;
-    height: 100vh;
-    background-color: #282c34;
-    transition: all 0.3s ease; /* Slightly faster transition */
-    box-shadow: -0.2% 0 0.5% rgba(0, 0, 0, 0.2); /* Changed from -2px to % */
-    z-index: 1000;
+    width: auto; /* Auto width to fit content */
+    max-width: 70%; /* Maximum width */
+    height: auto; /* Auto height based on content */
+    padding: 1.5em;
+    background-color: rgba(40, 44, 52, 0.9);
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.25);
+    transition: right 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
+    opacity: 0;
+    /* Position the origin of the nav menu at the right edge */
+    transform-origin: right center;
   }
   
   nav.active {
-    right: 0;
+    right: 4%; /* Position right next to the toggle button (button right % + width + padding) */
+    opacity: 1;
+    transform: translateY(50%);
+  }
+  
+  /* Make hover transition consistent */
+  .mobile-toggle:hover + nav,
+  nav:hover {
+    right: 4%; /* Same as active state */
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(50%);
   }
   
   nav ul {
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 0; /* Remove top padding explicitly for mobile view */
-    height: 100%;
+    align-items: flex-end; /* Right align menu items */
+    padding: 0.5em;
+    gap: 0.8em;
   }
   
   nav ul li {
-    margin: 1.5% 0;
-    width: 100%;
-    text-align: center;
+    margin: 0;
+    width: auto;
+    text-align: right;
+    white-space: nowrap; /* Prevent text wrapping */
   }
 
   nav ul li a {
-    padding: 1em;
+    padding: 0.4em 0.8em;
+    font-size: 0.95em;
+    border-radius: 0.3em;
+    background: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   nav ul {
@@ -261,6 +338,11 @@ footer {
     text-align: center;
   }
 
+  .footer-info p {
+    font-size: 0.75em; /* Even smaller on mobile */
+    margin: 0;
+  }
+
   .social-media {
     justify-content: center;
     margin-top: 1%; /* Use percentage instead of pixels */
@@ -270,6 +352,22 @@ footer {
   section {
     scroll-margin-top: 15%; /* Changed from 120px to % of viewport height */
   }
+
+  /* Add some delayed transition effect for mobile header */
+  header {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Add some padding to main to compensate for hidden header */
+  .hide-header + main {
+    padding-top: 0;
+  }
+  
+  /* Additional rule to ensure button stays hidden when menu is open */
+  body:has(nav.active) .mobile-toggle {
+    display: none !important; /* Completely hide it in DOM when nav is active */
+  }
 }
 
 /* Add smooth transition for section visibility */
@@ -277,4 +375,16 @@ section {
   scroll-margin-top: 5%; /* Changed from 80px to % */
   transition: opacity 0.4s ease-in-out, transform 0.4s ease-out;
   will-change: opacity, transform;
+}
+
+/* Add some padding to main for both mobile and desktop when header is hidden */
+.hide-header + main {
+  padding-top: 0;
+  margin-top: 0; /* Ensure no gap */
+}
+
+/* Special handling for home section when header is hidden */
+.hide-header ~ main section:first-child {
+  margin-top: 0;
+  padding-top: 0;
 }

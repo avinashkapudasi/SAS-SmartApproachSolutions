@@ -36,7 +36,8 @@
 
 .home-section {
   position: relative;
-  height: 100vh;
+  height: 100vh; /* Keep at 100vh to fill entire viewport */
+  min-height: 100vh; /* Ensure minimum height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,9 +49,16 @@
   overflow: hidden;
   border-radius: 2%; /* Changed from 30px */
   box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.1);
-  margin-top: 2%; /* Changed from 20px */
+  margin-top: 0; /* Remove top margin to eliminate gap */
   margin-bottom: 2%; /* Changed from 20px */
   box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.2);
+}
+
+/* When header is hidden, adjust home section to fill header space too */
+:has(header.hide-header) .home-section {
+  height: calc(100vh + var(--header-height, 0px)); /* Add hidden header height to fill the space */
+  margin-top: 0;
+  border-radius: 0; /* Remove border radius at top when header is hidden */
 }
 
 .home-background-image {
@@ -185,7 +193,7 @@
 
 /* Styling for all sections */
 section {
-  padding: 2% 5%; /* Updated to have equal left and right padding */
+  padding: 5% 5%; /* Updated to have equal left and right padding */
   box-sizing: border-box;
   position: relative;
   margin: 2% 0; /* Changed from 20px */
