@@ -185,22 +185,12 @@ const Layout = ({ children }) => {
         </div>
       </header>
       
-      {/* Mobile toggle button - updated inline styles for smaller size */}
+      {/* Mobile toggle button - Don't use inline styles that override CSS media queries */}
       <button 
         ref={toggleBtnRef}
         className={`mobile-toggle ${isMobileMenuOpen ? 'active' : ''}`}
         onClick={toggleMobileMenu}
         aria-label="Toggle mobile menu"
-        style={{ 
-          display: 'flex',
-          position: 'fixed',
-          right: '15px',
-          top: '50%',
-          width: '36px',
-          height: '36px',
-          padding: '7px',
-          zIndex: 9999
-        }}
       >
         <span></span>
         <span></span>

@@ -240,9 +240,16 @@ footer {
   }
   
   .mobile-toggle {
-    display: flex !important;
+    display: flex !important; /* Only show in mobile view */
     visibility: visible !important;
     opacity: 1 !important;
+  }
+
+  /* Hide toggle button when nav is active */
+  .mobile-toggle.active {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
   }
   
   .header-container {
@@ -317,6 +324,13 @@ section {
   background-color: rgba(40, 44, 52, 1);
 }
 
+/* Special styling when in home section - make button appear behind the home content */
+.mobile-toggle.in-home {
+  opacity: 0.4;
+  background-color: rgba(40, 44, 52, 0.4);
+  z-index: 0; /* Lower z-index when in home section so it appears behind */
+}
+
 /* Updated mobile side navigation to be floating and transparent */
 .mobile-nav {
   position: fixed;
@@ -376,4 +390,10 @@ body.no-scroll {
   width: 100%;
   height: 100%;
   touch-action: none; /* Prevent scrolling on touch devices */
+}
+
+/* Add a higher z-index to the home section to ensure it's above the toggle button */
+section#home {
+  position: relative;
+  z-index: 1; /* Any positive value higher than the toggle button's z-index when in home */
 }
