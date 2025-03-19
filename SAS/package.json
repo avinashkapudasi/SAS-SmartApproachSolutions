@@ -1,13 +1,13 @@
 {
-  "homepage": "http://avinashkapudasi.github.io/SAS-SmartApproachSolutions ",
-  "name": "sas",
+  "homepage": "https://avinashkapudasi.github.io/SAS-SmartApproachSolutions ",
+  "name": "smart-approach-solutions",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
