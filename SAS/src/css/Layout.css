@@ -101,76 +101,6 @@ nav ul li a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.mobile-toggle {
-  /* Hide the toggle button by default (non-mobile) */
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  position: fixed;
-  right: 2%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1002;
-  background-color: rgba(40, 44, 52, 0.6);
-  border-radius: 50%;
-  padding: 1%;
-  opacity: 0.6; /* Make it slightly visible by default */
-  visibility: visible;
-  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-}
-
-/* Special styling when in home section - more transparent but still visible */
-.mobile-toggle.in-home {
-  opacity: 0.4;
-  background-color: rgba(40, 44, 52, 0.4);
-}
-
-/* Hover effect for toggle button */
-.mobile-toggle:hover {
-  opacity: 1;
-  background-color: rgba(40, 44, 52, 0.9);
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Hide toggle button when nav is active to avoid confusion */
-.mobile-toggle.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Hide toggle button when nav is active - make sure this is applied immediately */
-.mobile-toggle.hide {
-  opacity: 0 !important; /* Added !important to override any other styles */
-  visibility: hidden !important;
-  transition: opacity 0.1s ease, visibility 0.1s ease; /* Faster transition when hiding */
-  pointer-events: none; /* Make sure it can't be clicked when hidden */
-  transform: scale(0); /* Add extra transform to ensure it's really gone */
-}
-
-/* Make sure this is below any hover styles to take precedence */
-nav.active + .mobile-toggle {
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-.mobile-toggle span {
-  height: 0.4em; /* Changed from 6px to em */
-  width: 0.4em; /* Changed from 6px to em */
-  background-color: white;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  margin: 0.15em auto; /* Changed from 2px to em */
-  display: block;
-}
-
-.mobile-toggle span:hover {
-  transform: scale(1.2);
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
 main {
   flex: 1;
   padding-left: 1%;
@@ -242,89 +172,30 @@ footer {
     margin-bottom: 2%; /* Add space between logo and nav in mobile view */
     text-align: center; /* Center the text/logo */
   }
-
-  .mobile-toggle {
-    display: flex; /* Always show on mobile */
-    visibility: visible;
-  }
   
-  /* Make nav auto-show when hovering toggle button */
-  .mobile-toggle:hover + nav,
-  nav:hover {
-    right: 0;
-    visibility: visible;
-    opacity: 1;
-  }
-
   nav {
-    position: fixed;
-    top: 50%; /* Match toggle button positioning */
-    transform: translateY(50%); /* Match toggle button transform */
-    right: -100%;
-    width: auto; /* Auto width to fit content */
-    max-width: 70%; /* Maximum width */
-    height: auto; /* Auto height based on content */
-    padding: 1.5em;
-    background-color: rgba(40, 44, 52, 0.9);
-    border-radius: 1em;
-    box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.25);
-    transition: right 0.3s ease, opacity 0.3s ease;
-    z-index: 999;
-    opacity: 0;
-    /* Position the origin of the nav menu at the right edge */
-    transform-origin: right center;
-  }
-  
-  nav.active {
-    right: 4%; /* Position right next to the toggle button (button right % + width + padding) */
+    position: static; /* Keep navigation in normal flow */
+    width: 100%;
+    top: auto;
+    transform: none;
+    right: auto;
     opacity: 1;
-    transform: translateY(50%);
-  }
-  
-  /* Make hover transition consistent */
-  .mobile-toggle:hover + nav,
-  nav:hover {
-    right: 4%; /* Same as active state */
     visibility: visible;
-    opacity: 1;
-    transform: translateY(50%);
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
   }
   
   nav ul {
-    flex-direction: column;
-    align-items: flex-end; /* Right align menu items */
-    padding: 0.5em;
-    gap: 0.8em;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 0.5em 0;
   }
   
   nav ul li {
-    margin: 0;
-    width: auto;
-    text-align: right;
-    white-space: nowrap; /* Prevent text wrapping */
-  }
-
-  nav ul li a {
-    padding: 0.4em 0.8em;
-    font-size: 0.95em;
-    border-radius: 0.3em;
-    background: transparent;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  nav ul {
-    flex-direction: column;
-    align-items: flex-end; /* Align items to the right in mobile view */
-  }
-
-  nav ul li {
-    margin: 0.5% 0; /* Use percentage instead of pixels */
+    margin: 0.2em;
   }
 
   .footer-info {
@@ -363,10 +234,19 @@ footer {
   .hide-header + main {
     padding-top: 0;
   }
+
+  .desktop-nav {
+    display: none;
+  }
   
-  /* Additional rule to ensure button stays hidden when menu is open */
-  body:has(nav.active) .mobile-toggle {
-    display: none !important; /* Completely hide it in DOM when nav is active */
+  .mobile-toggle {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .header-container {
+    justify-content: center; /* Center website name in mobile view */
   }
 }
 
@@ -387,4 +267,113 @@ section {
 .hide-header ~ main section:first-child {
   margin-top: 0;
   padding-top: 0;
+}
+
+/* Add these new styles for the mobile toggle button and side navigation */
+.mobile-toggle {
+  display: none; /* Hide by default */
+  position: fixed;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px; /* Smaller size (was 50px) */
+  height: 36px; /* Smaller size (was 50px) */
+  background-color: rgba(40, 44, 52, 0.8); /* Slightly less opaque for subtlety */
+  border: none;
+  border-radius: 50%;
+  z-index: 1100;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 7px; /* Smaller padding (was 10px) */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Slightly reduced shadow */
+  transition: all 0.3s ease;
+}
+
+.mobile-toggle span {
+  display: block;
+  width: 22px; /* Smaller width (was 30px) */
+  height: 3px; /* Thinner lines (was 4px) */
+  margin: 3px 0; /* Reduced spacing (was 4px) */
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-toggle.active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg); /* Adjusted from 9px to 6px */
+}
+
+.mobile-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg); /* Adjusted from -9px to -6px */
+}
+
+.mobile-toggle:hover {
+  background-color: rgba(40, 44, 52, 1);
+}
+
+/* Updated mobile side navigation to be floating and transparent */
+.mobile-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -300px;
+  width: 250px;
+  background-color: rgba(40, 44, 52, 0.65); /* More transparent */
+  backdrop-filter: blur(12px); /* Increased blur for frosted glass effect */
+  -webkit-backdrop-filter: blur(12px); /* For Safari support */
+  border-radius: 20px; /* Fully rounded corners on all sides for floating effect */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); /* Softer, more spread out shadow */
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for depth */
+  max-height: 90vh; /* Add max height to allow scrolling within the menu if needed */
+  overflow-y: auto; /* Allow scrolling within the menu */
+}
+
+.mobile-nav.open {
+  right: 15px; /* Keep some margin from the edge for floating appearance */
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav ul li {
+  margin: 10px 0;
+}
+
+.mobile-nav ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 12px 15px;
+  border-radius: 12px; /* Larger radius for menu items */
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.05); /* Very subtle background */
+}
+
+.mobile-nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* Slightly stronger on hover */
+  transform: translateX(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+}
+
+/* Add styles to lock scrolling when mobile menu is open */
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  touch-action: none; /* Prevent scrolling on touch devices */
 }

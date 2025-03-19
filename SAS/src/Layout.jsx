@@ -3,12 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import './css/Layout.css';
 
 const Layout = ({ children }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Removed unused isScrolled state
-  const [isInHomeSection, setIsInHomeSection] = useState(true); // Add state for home section
+  const [isInHomeSection, setIsInHomeSection] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Add state for mobile menu
   const scrollTimerRef = useRef(null);
   const navRef = useRef(null);
-  const toggleRef = useRef(null);
+  const toggleBtnRef = useRef(null); // Add ref for toggle button
   const location = useLocation();
   const isMobile = useRef(window.innerWidth <= 768);
 
@@ -16,6 +15,9 @@ const Layout = ({ children }) => {
   useEffect(() => {
     const handleResize = () => {
       isMobile.current = window.innerWidth <= 768;
+      if (!isMobile.current) {
+        setIsMobileMenuOpen(false); // Close mobile menu if resized to desktop
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -29,42 +31,29 @@ const Layout = ({ children }) => {
       const headerHeight = header.offsetHeight;
       document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
     }
-    
-    // Existing code for handleScroll...
   }, []);
 
+  // Handle scroll detection for home section
   useEffect(() => {
     const handleScroll = () => {
       // Clear any existing timer
-      if (scrollTimerRef.current) {
-        clearTimeout(scrollTimerRef.current);
+      const scrollTimer = scrollTimerRef.current;
+      if (scrollTimer) {
+        clearTimeout(scrollTimer);
       }
       
-      // Check if we're in the home section - now for all devices, not just mobile
+      // Check if we're in the home section
       const homeSection = document.getElementById('home');
       const aboutSection = document.getElementById('about');
       
       if (homeSection && aboutSection) {
-        // Get the position of the about section relative to the viewport
         const aboutRect = aboutSection.getBoundingClientRect();
-        // If the top of about section is close to entering the viewport, show the header
         const isAboutVisible = aboutRect.top <= window.innerHeight * 0.9;
-        
-        // We're in the home section if we've not yet reached the about section
         setIsInHomeSection(!isAboutVisible);
       }
-      
-      // Set a new timer to hide the toggle after 2 seconds of no scrolling
-      scrollTimerRef.current = setTimeout(() => {
-        if (!isMenuOpen) {
-          // Removed unused setIsScrolled
-        }
-      }, 2000);
     };
 
     window.addEventListener('scroll', handleScroll);
-    
-    // Run once to set initial state
     handleScroll();
     
     return () => {
@@ -73,17 +62,17 @@ const Layout = ({ children }) => {
         clearTimeout(scrollTimerRef.current);
       }
     };
-  }, [isMenuOpen]);
+  }, []);
 
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMenuOpen && 
+      if (isMobileMenuOpen && 
           navRef.current && 
-          toggleRef.current && 
+          toggleBtnRef.current && 
           !navRef.current.contains(event.target) && 
-          !toggleRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
+          !toggleBtnRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -91,14 +80,11 @@ const Layout = ({ children }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isMenuOpen]);
+  }, [isMobileMenuOpen]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    // Keep toggle button visible when menu is open
-    if (!isMenuOpen) {
-      // Removed unused setIsScrolled
-    }
+  // Function to toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   // Handle smooth scrolling to sections with improved performance
@@ -112,7 +98,7 @@ const Layout = ({ children }) => {
     }
     
     // Close mobile menu
-    setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
     
     // Immediate execution for better responsiveness - reduced delay
     const section = document.getElementById(sectionId);
@@ -185,35 +171,61 @@ const Layout = ({ children }) => {
           <div>
             <Link to="/">My Website</Link>
           </div>
-          <nav ref={navRef} className={isMenuOpen ? 'active' : ''}>
+          {/* Desktop navigation */}
+          <nav className="desktop-nav">
             <ul>
-              <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>Home</a></li>
-              <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About Us</a></li>
-              <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>Services</a></li>
-              <li><a href="#team" onClick={(e) => scrollToSection(e, 'team')}>Our Team</a></li>
+              <li><a onClick={(e) => scrollToSection(e, 'home')}>Home</a></li>
+              <li><a onClick={(e) => scrollToSection(e, 'about')}>About Us</a></li>
+              <li><a onClick={(e) => scrollToSection(e, 'services')}>Services</a></li>
+              <li><a onClick={(e) => scrollToSection(e, 'team')}>Our Team</a></li>
               <li><Link to="/careers">Careers</Link></li>
-              <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact Us</a></li>
-              {/* <li><Link to="/contact">Contact Us</Link></li> */}
+              <li><a onClick={(e) => scrollToSection(e, 'contact')}>Contact Us</a></li>
             </ul>
           </nav>
         </div>
       </header>
       
-      {/* Fixed toggle button that disappears completely when nav is active */}
-      <div 
-        ref={toggleRef}
-        className={`mobile-toggle ${isMenuOpen ? 'hide' : ''} ${isInHomeSection ? 'in-home' : ''}`}
-        style={{ display: isMenuOpen ? 'none' : 'flex' }} /* Added inline style for immediate response */
-        onClick={toggleMenu}
+      {/* Mobile toggle button - updated inline styles for smaller size */}
+      <button 
+        ref={toggleBtnRef}
+        className={`mobile-toggle ${isMobileMenuOpen ? 'active' : ''}`}
+        onClick={toggleMobileMenu}
+        aria-label="Toggle mobile menu"
+        style={{ 
+          display: 'flex',
+          position: 'fixed',
+          right: '15px',
+          top: '50%',
+          width: '36px',
+          height: '36px',
+          padding: '7px',
+          zIndex: 9999
+        }}
       >
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
+      
+      {/* Mobile side navigation */}
+      <nav 
+        ref={navRef} 
+        className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}
+      >
+        <ul>
+          <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>Home</a></li>
+          <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About Us</a></li>
+          <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>Services</a></li>
+          <li><a href="#team" onClick={(e) => scrollToSection(e, 'team')}>Our Team</a></li>
+          <li><Link to="/careers">Careers</Link></li>
+          <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact Us</a></li>
+        </ul>
+      </nav>
       
       <main>
         {children}
       </main>
+      
       <footer>
         <div className="footer-info">
           <p>© Copyright 2025 Prime | All Rights Reserved.</p>
