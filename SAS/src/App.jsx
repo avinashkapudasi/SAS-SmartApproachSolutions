@@ -9,7 +9,7 @@ import {
   faHeadset, faChartLine, faGlobe, faCogs, 
   faPhone, faEnvelope, faCommentDots, faHashtag, 
   faVideo, faSms 
-} from '@fortawesome/free-solid-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';//adding for deployment
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import ContactUs from './components/ContactUs'
 import Loader from './components/Common/Loader/Loader'
