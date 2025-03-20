@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ApplicationModal from './ApplicationModal';
 import jobListingsData from '../assets/data/jobListings.json';
 import { JobListing } from '../types/JobListing';
+import styles from '../css/Careers.module.css';
 
 const Careers = () => {
   const [showForm, setShowForm] = useState(null);
@@ -12,26 +13,31 @@ const Careers = () => {
   };
 
   return (
-    <div className="careers-container">
+    <div className={styles.careersContainer}>
       <h1>Careers</h1>
-      <p>Join our team and be part of something great!</p>
+      <p className={styles.subtitle}>Join our team and be part of something great!</p>
       
-      <div className="job-listings">
+      <div className={styles.jobListingsGrid}>
         {jobListings.map((job, index) => (
-          <div className="job-card" key={index}>
-            <h2>{job.title}</h2>
-            <p>{job.description}</p>
-            <ul>
-              {job.requirements.map((req, reqIndex) => (
-                <li key={reqIndex}>{req}</li>
-              ))}
-            </ul>
-            <button 
-              className="apply-btn" 
-              onClick={() => handleApply(job.formUrl)}
-            >
-              Apply Now
-            </button>
+          <div className={styles.jobCard} key={index}>
+            <div className={styles.cardContent}>
+              <h2>{job.title}</h2>
+              <p className={styles.description}>{job.description}</p>
+              <div className={styles.requirements}>
+                <h3>Requirements:</h3>
+                <ul>
+                  {job.requirements.map((req, reqIndex) => (
+                    <li key={reqIndex}>{req}</li>
+                  ))}
+                </ul>
+              </div>
+              <button 
+                className={styles.applyBtn}
+                onClick={() => handleApply(job.formUrl)}
+              >
+                Apply Now
+              </button>
+            </div>
           </div>
         ))}
       </div>

@@ -13,11 +13,16 @@ import {
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import ContactUs from './components/ContactUs'
 import Loader from './components/Common/Loader/Loader'
+import { TeamMember } from './types/TeamMember';
+import teamData from './assets/data/teamMembers.json'
+
 
 function App() {
   useEffect(() => {
     document.title = "Smart Approach Solutions";
   }, []);
+
+  const teamMembers = TeamMember.fromJSONArray(teamData.team);
 
   return (
     <Router>
@@ -129,47 +134,28 @@ function App() {
             <section id="team">
               <h2>Our Team</h2>
               <p>Meet our dedicated team members who make everything possible.</p>
-              
+             
               <div className="team-grid">
-                <div className="team-member">
-                  <div className="member-image">
-                    <img src="/assets/ceo.jpg" alt="CEO" />
-                  </div>
-                  <h3>Sharma</h3>
-                  <p className="member-role">Chief Executive Officer</p>
-                  <p className="member-desc">With the best industry experience to offer, Sharma leads our company with vision and integrity.</p>
-                  <div className="member-social">
-                    <a href="#"><FontAwesomeIcon icon={faLinkedin} /></a>
-                    <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
-                  </div>
+                  {teamMembers.map((member, index) => (
+                    <div className="team-member" key={index}>
+                      <div className="member-image">
+                        <img src={member.image} alt={member.name} />
+                      </div>
+                      <h3>{member.name}</h3>
+                      <p className="member-role">{member.role}</p>
+                      <p className="member-desc">{member.description}</p>
+                      <div className="member-social">
+                        <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer">
+                          <FontAwesomeIcon icon={faLinkedin} />
+                        </a>
+                        <a href={member.social.twitter} target="_blank" rel="noopener noreferrer">
+                          <FontAwesomeIcon icon={faTwitter} />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                
-                <div className="team-member">
-                  <div className="member-image">
-                    <img src="/assets/hr.jpg" alt="HR Director" />
-                  </div>
-                  <h3>Usha Sri</h3>
-                  <p className="member-role">HR Director</p>
-                  <p className="member-desc">Usha ensures we recruit and retain the best talent to provide outstanding customer support.</p>
-                  <div className="member-social">
-                    <a href="https://www.linkedin.com/in/ushasri-lanka-484077199/"><FontAwesomeIcon icon={faLinkedin} /></a>
-                    <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
-                  </div>
-                </div>
-                
-                <div className="team-member">
-                  <div className="member-image">
-                    <img src="/assets/manager.jpg" alt="Operations Manager" />
-                  </div>
-                  <h3>AMAR</h3>
-                  <p className="member-role">Operations Manager</p>
-                  <p className="member-desc">Amar our daily operations and ensures we deliver exceptional service to all clients.</p>
-                  <div className="member-social">
-                    <a href="#"><FontAwesomeIcon icon={faLinkedin} /></a>
-                    <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
-                  </div>
-                </div>
-              </div>
+             
             </section>
             <section id="contact">
               <h2>Contact Us</h2>

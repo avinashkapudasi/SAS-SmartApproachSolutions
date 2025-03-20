@@ -1,0 +1,34 @@
+{
+    "team": [
+      {
+        "name": "Sharma",
+        "role": "Chief Executive Officer",
+        "description": "With the best industry experience to offer, Sharma leads our company with vision and integrity.",
+        "image": "/assets/ceo.jpg",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/sharma-ceo",
+          "twitter": "https://twitter.com/sharmaCEO"
+        }
+      },
+      {
+        "name": "Usha Sri",
+        "role": "HR Director",
+        "description": "Usha ensures we recruit and retain the best talent to provide outstanding customer support.",
+        "image": "/assets/hr.jpg",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/ushasri-lanka-484077199/",
+          "twitter": "https://twitter.com/ushasriHR"
+        }
+      },
+      {
+        "name": "AMAR",
+        "role": "Operations Manager",
+        "description": "Amar our daily operations and ensures we deliver exceptional service to all clients.",
+        "image": "/assets/manager.jpg",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/amar-manager",
+          "twitter": "https://twitter.com/amarOPS"
+        }
+      }
+    ]
+  }

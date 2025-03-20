@@ -1,0 +1,125 @@
+.careersContainer {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.jobListingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.jobCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.jobCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+.jobCard h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.requirements {
+  margin-bottom: 1.5rem;
+}
+
+.requirements h3 {
+  color: #444;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.requirements ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.requirements li {
+  color: #666;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.requirements li:before {
+  content: "•";
+  color: #007bff;
+  position: absolute;
+  left: 0;
+}
+
+.applyBtn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.applyBtn:hover {
+  background-color: #0056b3;
+}
+
+/* Tablet View */
+@media (max-width: 768px) {
+  .jobListingsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .careersContainer {
+    padding: 3rem 1.5rem;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+  .jobListingsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .careersContainer {
+    padding: 2rem 1rem;
+  }
+
+  .jobCard h2 {
+    font-size: 1.3rem;
+  }
+
+  .requirements h3 {
+    font-size: 1rem;
+  }
+}
