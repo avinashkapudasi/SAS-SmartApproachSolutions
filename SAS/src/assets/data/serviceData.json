@@ -1,0 +1,40 @@
+{
+    "services": [
+      {
+        "id": "voice-support",
+        "title": "Voice Support",
+        "description": "Traditional call centers handling inbound/outbound calls with professionally trained agents.",
+        "icon": "faPhone"
+      },
+      {
+        "id": "email-management",
+        "title": "Email Management",
+        "description": "Response to customer inquiries via email with tailored solutions and prompt turnaround times.",
+        "icon": "faEnvelope"
+      },
+      {
+        "id": "live-chat",
+        "title": "Live Chat",
+        "description": "Real-time text-based support on websites/apps providing immediate assistance to customers.",
+        "icon": "faCommentDots"
+      },
+      {
+        "id": "social-media",
+        "title": "Social Media",
+        "description": "Monitoring and responding to queries on platforms like Facebook, Twitter to enhance brand presence.",
+        "icon": "faHashtag"
+      },
+      {
+        "id": "video-support",
+        "title": "Video Support",
+        "description": "Face-to-face virtual assistance for more personalized customer support experiences.",
+        "icon": "faVideo"
+      },
+      {
+        "id": "sms-support",
+        "title": "SMS/Text",
+        "description": "Mobile messaging support for quick queries and updates, designed for on-the-go customers.",
+        "icon": "faSms"
+      }
+    ]
+  }

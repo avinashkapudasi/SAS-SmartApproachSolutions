@@ -15,6 +15,8 @@ import ContactUs from './components/ContactUs'
 import Loader from './components/Common/Loader/Loader'
 import { TeamMember } from './types/TeamMember';
 import teamData from './assets/data/teamMembers.json'
+import servicesData from './assets/data/serviceData.json'
+import { Service } from './types/ServiceDetails';
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
   }, []);
 
   const teamMembers = TeamMember.fromJSONArray(teamData.team);
+  const services = Service.fromJSONArray(servicesData.services);
 
   return (
     <Router>
@@ -78,59 +81,21 @@ function App() {
               </div>
             </section>
             <section id="services">
-              <h2>Services</h2>
-              <p>Discover our comprehensive customer support services.</p>
-              
-              <div className="services-grid">
-                <div className="service-block">
-                  <div className="service-icon">
-                    <FontAwesomeIcon icon={faPhone} />
-                  </div>
-                  <h3>Voice Support</h3>
-                  <p>Traditional call centers handling inbound/outbound calls with professionally trained agents.</p>
-                </div>
+                <h2>Services</h2>
+                <p>Discover our comprehensive customer support services.</p>
                 
-                <div className="service-block">
-                  <div className="service-icon">
-                    <FontAwesomeIcon icon={faEnvelope} />
-                  </div>
-                  <h3>Email Management</h3>
-                  <p>Response to customer inquiries via email with tailored solutions and prompt turnaround times.</p>
+                <div className="services-grid">
+                  {services.map((service) => (
+                    <div className="service-block" key={service.id}>
+                      <div className="service-icon">
+                        <FontAwesomeIcon icon={eval(service.icon)} />
+                      </div>
+                      <h3>{service.title}</h3>
+                      <p>{service.description}</p>
+                    </div>
+                  ))}
                 </div>
-                
-                <div className="service-block">
-                  <div className="service-icon">
-                    <FontAwesomeIcon icon={faCommentDots} />
-                  </div>
-                  <h3>Live Chat</h3>
-                  <p>Real-time text-based support on websites/apps providing immediate assistance to customers.</p>
-                </div>
-                
-                <div className="service-block">
-                  <div className="service-icon">
-                    <FontAwesomeIcon icon={faHashtag} />
-                  </div>
-                  <h3>Social Media</h3>
-                  <p>Monitoring and responding to queries on platforms like Facebook, Twitter to enhance brand presence.</p>
-                </div>
-                
-                <div className="service-block">
-                  <div className="service-icon">
-                    <FontAwesomeIcon icon={faVideo} />
-                  </div>
-                  <h3>Video Support</h3>
-                  <p>Face-to-face virtual assistance for more personalized customer support experiences.</p>
-                </div>
-                
-                <div className="service-block">
-                  <div className="service-icon">
-                    <FontAwesomeIcon icon={faSms} />
-                  </div>
-                  <h3>SMS/Text</h3>
-                  <p>Mobile messaging support for quick queries and updates, designed for on-the-go customers.</p>
-                </div>
-              </div>
-            </section>
+              </section>
             <section id="team">
               <h2>Our Team</h2>
               <p>Meet our dedicated team members who make everything possible.</p>
