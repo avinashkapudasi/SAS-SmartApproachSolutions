@@ -6,9 +6,14 @@ import Careers from './components/Careers'
 import homeImage from './assets/home.jpeg' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faHeadset, faChartLine, faGlobe, faCogs, 
+  faHeadset, faChartLine, faCogs, 
   faPhone, faEnvelope, faCommentDots, faHashtag, 
-  faVideo, faSms 
+  faVideo, faSms, 
+  faUsers, 
+  faGears, 
+  faGlobe, 
+  faRobot, 
+  faGraduationCap  
 } from '@fortawesome/free-solid-svg-icons';//adding for deployment
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import ContactUs from './components/ContactUs'

@@ -1,40 +1,40 @@
 {
-    "services": [
-      {
-        "id": "voice-support",
-        "title": "Voice Support",
-        "description": "Traditional call centers handling inbound/outbound calls with professionally trained agents.",
-        "icon": "faPhone"
-      },
-      {
-        "id": "email-management",
-        "title": "Email Management",
-        "description": "Response to customer inquiries via email with tailored solutions and prompt turnaround times.",
-        "icon": "faEnvelope"
-      },
-      {
-        "id": "live-chat",
-        "title": "Live Chat",
-        "description": "Real-time text-based support on websites/apps providing immediate assistance to customers.",
-        "icon": "faCommentDots"
-      },
-      {
-        "id": "social-media",
-        "title": "Social Media",
-        "description": "Monitoring and responding to queries on platforms like Facebook, Twitter to enhance brand presence.",
-        "icon": "faHashtag"
-      },
-      {
-        "id": "video-support",
-        "title": "Video Support",
-        "description": "Face-to-face virtual assistance for more personalized customer support experiences.",
-        "icon": "faVideo"
-      },
-      {
-        "id": "sms-support",
-        "title": "SMS/Text",
-        "description": "Mobile messaging support for quick queries and updates, designed for on-the-go customers.",
-        "icon": "faSms"
-      }
-    ]
-  }
+  "services": [
+    {
+      "id": "customer-support-services",
+      "title": "Customer Support Services",
+      "description": "To establish and operate call centers providing inbound and outbound customer service, including inquiry handling, complaint resolution, and technical support.",
+      "icon": "faHeadset"
+    },
+    {
+      "id": "telemarketing-lead-generation",
+      "title": "Telemarketing & Lead Generation",
+      "description": "To offer sales, telemarketing, and lead generation services, assisting businesses in customer acquisition and market expansion.",
+      "icon": "faUsers"
+    },
+    {
+      "id": "business-process-outsourcing",
+      "title": "Business Process Outsourcing (BPO)",
+      "description": "To manage customer interactions, order processing, appointment scheduling, and other outsourced business operations for clients across various industries.",
+      "icon": "faGears"
+    },
+    {
+      "id": "multilingual-support",
+      "title": "Multilingual Support & Global Reach",
+      "description": "To provide multilingual customer service solutions, enabling businesses to cater to diverse customer bases worldwide.",
+      "icon": "faGlobe"
+    },
+    {
+      "id": "ai-technology-integration",
+      "title": "AI & Technology Integration",
+      "description": "To leverage AI-powered chatbots, automated response systems, and CRM tools to enhance call center efficiency and customer satisfaction.",
+      "icon": "faRobot"
+    },
+    {
+      "id": "training-development",
+      "title": "Training & Workforce Development",
+      "description": "To offer specialized training programs for call center professionals, ensuring high-quality service delivery and operational excellence.",
+      "icon": "faGraduationCap"
+    }
+  ]
+}
