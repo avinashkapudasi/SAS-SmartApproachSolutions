@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './Layout'
 import Careers from './components/Careers'
 import homeImage from './assets/home.jpeg' 
+ 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHeadset, faChartLine, faCogs, 
@@ -13,7 +14,9 @@ import {
   faGears, 
   faGlobe, 
   faRobot, 
-  faGraduationCap  
+  faGraduationCap,
+  faChevronLeft,
+  faChevronRight  
 } from '@fortawesome/free-solid-svg-icons';//adding for deployment
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import ContactUs from './components/ContactUs'
@@ -25,12 +28,68 @@ import { Service } from './types/ServiceDetails';
 
 
 function App() {
+  const [currentTeamMember, setCurrentTeamMember] = useState(0);
+  const autoScrollInterval = useRef(null);
+
   useEffect(() => {
     document.title = "Smart Approach Solutions";
   }, []);
 
   const teamMembers = TeamMember.fromJSONArray(teamData.team);
   const services = Service.fromJSONArray(servicesData.services);
+
+  // Set up carousel auto-scroll
+  useEffect(() => {
+    if (!teamMembers || teamMembers.length <= 1) return;
+    
+    const scroll = () => {
+      setCurrentTeamMember(prev => (prev + 1) % teamMembers.length);
+    };
+    
+    // Start auto-scrolling
+    autoScrollInterval.current = setInterval(scroll, 5000);
+    
+    // Clean up interval on unmount
+    return () => {
+      if (autoScrollInterval.current) {
+        clearInterval(autoScrollInterval.current);
+      }
+    };
+  }, [teamMembers]);
+  
+  // Handle carousel navigation
+  const navigateCarousel = (direction) => {
+    // Reset the auto-scroll timer when manually navigating
+    if (autoScrollInterval.current) {
+      clearInterval(autoScrollInterval.current);
+    }
+    
+    if (direction === 'prev') {
+      setCurrentTeamMember(prev => (prev === 0 ? teamMembers.length - 1 : prev - 1));
+    } else {
+      setCurrentTeamMember(prev => (prev + 1) % teamMembers.length);
+    }
+    
+    // Restart auto-scroll
+    autoScrollInterval.current = setInterval(() => {
+      setCurrentTeamMember(prev => (prev + 1) % teamMembers.length);
+    }, 5000);
+  };
+  
+  // Jump to specific team member
+  const jumpToTeamMember = (index) => {
+    // Reset the auto-scroll timer
+    if (autoScrollInterval.current) {
+      clearInterval(autoScrollInterval.current);
+    }
+    
+    setCurrentTeamMember(index);
+    
+    // Restart auto-scroll
+    autoScrollInterval.current = setInterval(() => {
+      setCurrentTeamMember(prev => (prev + 1) % teamMembers.length);
+    }, 5000);
+  };
 
   return (
     <Router>
@@ -43,9 +102,9 @@ function App() {
                 alt="Home Background" 
                 className="home-background-image" 
               />
-              <div className="home-content">
-                <h1>Welcome to SAS</h1>
-              </div>
+              {/* <div className="home-content">
+                
+              </div> */}
             </section>
             <section id="about">
               <h2>About Us</h2>
@@ -105,27 +164,60 @@ function App() {
               <h2>Our Team</h2>
               <p>Meet our dedicated team members who make everything possible.</p>
              
-              <div className="team-grid">
-                  {teamMembers.map((member, index) => (
-                    <div className="team-member" key={index}>
-                      <div className="member-image">
-                        <img src={member.image} alt={member.name} />
+              <div className="team-carousel-container">
+                <button 
+                  className="carousel-btn prev-btn" 
+                  aria-label="Previous team member"
+                  onClick={() => navigateCarousel('prev')}
+                >
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
+                
+                <div className="team-carousel">
+                  <div 
+                    className="team-carousel-inner" 
+                    style={{ transform: `translateX(-${currentTeamMember * 100}%)` }}
+                  >
+                    {teamMembers.map((member, index) => (
+                      <div className="team-card" key={index}>
+                        <div className="member-image">
+                          <img src={member.image} alt={member.name} />
+                        </div>
+                        <h3>{member.name}</h3>
+                        <p className="member-role">{member.role}</p>
+                        <p className="member-desc">{member.description}</p>
+                        <div className="member-social">
+                          <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faLinkedin} />
+                          </a>
+                          <a href={member.social.twitter} target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                        </div>
                       </div>
-                      <h3>{member.name}</h3>
-                      <p className="member-role">{member.role}</p>
-                      <p className="member-desc">{member.description}</p>
-                      <div className="member-social">
-                        <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer">
-                          <FontAwesomeIcon icon={faLinkedin} />
-                        </a>
-                        <a href={member.social.twitter} target="_blank" rel="noopener noreferrer">
-                          <FontAwesomeIcon icon={faTwitter} />
-                        </a>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-             
+                
+                <button 
+                  className="carousel-btn next-btn" 
+                  aria-label="Next team member"
+                  onClick={() => navigateCarousel('next')}
+                >
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </button>
+              </div>
+              
+              <div className="carousel-indicators">
+                {teamMembers.map((_, index) => (
+                  <button 
+                    key={index}
+                    className={`carousel-indicator ${currentTeamMember === index ? 'active' : ''}`}
+                    aria-label={`Go to team member ${index + 1}`}
+                    onClick={() => jumpToTeamMember(index)}
+                  />
+                ))}
+              </div>
             </section>
             <section id="contact">
               <h2>Contact Us</h2>

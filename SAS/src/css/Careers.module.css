@@ -7,7 +7,7 @@
 
 .subtitle {
   text-align: center;
-  color: #666;
+  color: #000;
   margin-bottom: 3rem;
 }
 
@@ -19,16 +19,15 @@
 }
 
 .jobCard {
-  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(128, 128, 128, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
 }
 
 .jobCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(128, 128, 128, 0.2);
 }
 
 .cardContent {
@@ -36,13 +35,13 @@
 }
 
 .jobCard h2 {
-  color: #333;
+  color: #000;
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
 
 .description {
-  color: #666;
+  color: #000;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -52,7 +51,7 @@
 }
 
 .requirements h3 {
-  color: #444;
+  color: #000;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
@@ -63,7 +62,7 @@
 }
 
 .requirements li {
-  color: #666;
+  color: #000;
   margin-bottom: 0.5rem;
   padding-left: 1.5rem;
   position: relative;

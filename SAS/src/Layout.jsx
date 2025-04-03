@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './css/Layout.css';
+import Logo from './assets/sappss.png'; // Import logo image
 
 const Layout = ({ children }) => {
   const [isInHomeSection, setIsInHomeSection] = useState(true);
@@ -168,8 +169,12 @@ const Layout = ({ children }) => {
     <div className="layout">
       <header className={isInHomeSection ? 'hide-header' : ''}>
         <div className="header-container">
-          <div>
-            <Link to="/">My Website</Link>
+          <div className="logo-container">
+              <img 
+                src={Logo}
+                alt="SAS Logo" 
+                className="header-logo"
+              />
           </div>
           {/* Desktop navigation */}
           <nav className="desktop-nav">

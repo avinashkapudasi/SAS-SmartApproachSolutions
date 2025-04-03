@@ -6,7 +6,7 @@
   
 .subtitle {
     text-align: center;
-    color: #666;
+    color: #000;
     margin-bottom: 3%;
 }
   
@@ -32,7 +32,7 @@
     padding: 2.5%;
     background-color: white;
     border-radius: 1.5%;
-    box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     align-items: center;
     margin-bottom: 3%;
@@ -40,19 +40,19 @@
   
 .infoCard:hover {
     transform: translateY(-10px);
-    box-shadow: 0 1% 2.5% rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1% 2.5% rgba(128, 128, 128, 0.1);
 }
   
 .infoCard h3 {
     margin: 0 0 1% 0;
-    color: var(--primary-color, #333);
+    color: #000;
     font-size: 1.3em;
 }
   
 .infoCard p, 
 .infoCard a {
     margin: 0;
-    color: var(--secondary-color, #666);
+    color: #000;
     text-decoration: none;
     font-size: 1em;
 }
@@ -79,7 +79,7 @@
 .mapContainer {
     border-radius: 1.5%;
     overflow: hidden;
-    box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-top: 5%;
     margin-bottom: 3%;
@@ -87,7 +87,7 @@
 
 .mapContainer:hover {
     transform: translateY(-5px);
-    box-shadow: 0 1% 2.5% rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1% 2.5% rgba(128, 128, 128, 0.1);
 }
   
 @media (max-width: 768px) {

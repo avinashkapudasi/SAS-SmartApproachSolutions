@@ -1,8 +1,8 @@
 {
     "team": [
       {
-        "name": "Sharma",
-        "role": "Chief Executive Officer",
+        "name": "Amar Raju",
+        "role": "Board of directors ",
         "description": "With the best industry experience to offer, Sharma leads our company with vision and integrity.",
         "image": "/assets/ceo.jpg",
         "social": {
@@ -11,8 +11,8 @@
         }
       },
       {
-        "name": "Usha Sri",
-        "role": "HR Director",
+        "name": "Lanka Usha sri ",
+        "role": "Managing director",
         "description": "Usha ensures we recruit and retain the best talent to provide outstanding customer support.",
         "image": "/assets/hr.jpg",
         "social": {
@@ -21,9 +21,9 @@
         }
       },
       {
-        "name": "AMAR",
-        "role": "Operations Manager",
-        "description": "Amar our daily operations and ensures we deliver exceptional service to all clients.",
+        "name": "T.R.k Sharma",
+        "role": "Board of directors",
+        "description": "With the best industry experience to offer, Sharma leads our company with vision and integrity.",
         "image": "/assets/manager.jpg",
         "social": {
           "linkedin": "https://www.linkedin.com/in/amar-manager",

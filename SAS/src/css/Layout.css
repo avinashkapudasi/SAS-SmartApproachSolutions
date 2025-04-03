@@ -24,7 +24,7 @@ body {
 }
 
 header {
-  background-color: #282c34;
+  background-color: #8c8c8c;
   padding: 1%; /* Use percentage instead of pixels */
   color: white;
   text-align: center;
@@ -43,14 +43,14 @@ header {
 }
 
 /* New class to hide header when in home section on mobile */
-.hide-header {
+/* .hide-header {
   transform: translateY(-100%);
   opacity: 0;
-  height: 0; /* Add height: 0 to collapse the space */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
-  overflow: hidden; /* Hide overflow content */
-}
+  height: 0; /* Add height: 0 to collapse the space 
+  padding: 0; /* Remove padding 
+  margin: 0; /* Remove margin 
+  overflow: hidden; /* Hide overflow content 
+} */
 
 .header-container {
   display: flex;
@@ -67,6 +67,17 @@ header {
 .logo a {
   color: white;
   text-decoration: none;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  height: 40px; /* Adjust based on your header height */
+  width: auto;
+  object-fit: contain;
 }
 
 nav {
@@ -98,7 +109,7 @@ nav ul li a {
 nav ul li a:hover {
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(128, 128, 128, 0.2);
 }
 
 main {
@@ -114,8 +125,8 @@ main {
 }
 
 footer {
-  background-color: #282c34;
-  color: rgba(255, 255, 255, 0.7); /* Made text semi-transparent */
+  background-color: #8c8c8c;
+  color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -152,7 +163,7 @@ footer {
   margin-left: 1%; /* Use percentage instead of pixels */
 }
 
-.social-media img {
+social-media img {
   width: 2.4%; /* Use percentage instead of pixels */
   height: 2.4%; /* Use percentage instead of pixels */
 }
@@ -255,6 +266,10 @@ footer {
   .header-container {
     justify-content: center; /* Center website name in mobile view */
   }
+
+  .header-logo {
+    height: 30px; /* Slightly smaller on mobile */
+  }
 }
 
 /* Add smooth transition for section visibility */
@@ -285,7 +300,7 @@ section {
   transform: translateY(-50%);
   width: 36px; /* Smaller size (was 50px) */
   height: 36px; /* Smaller size (was 50px) */
-  background-color: rgba(40, 44, 52, 0.8); /* Slightly less opaque for subtlety */
+  background-color: rgba(140, 140, 140, 0.8); /* Changed from #282c34 */
   border: none;
   border-radius: 50%;
   z-index: 1100;
@@ -294,7 +309,7 @@ section {
   justify-content: center;
   align-items: center;
   padding: 7px; /* Smaller padding (was 10px) */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Slightly reduced shadow */
+  box-shadow: 0 3px 10px rgba(128, 128, 128, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -321,13 +336,13 @@ section {
 }
 
 .mobile-toggle:hover {
-  background-color: rgba(40, 44, 52, 1);
+  background-color: rgba(160, 160, 160, 1); /* Changed from #282c34 */
 }
 
 /* Special styling when in home section - make button appear behind the home content */
 .mobile-toggle.in-home {
   opacity: 0.4;
-  background-color: rgba(40, 44, 52, 0.4);
+  background-color: rgba(140, 140, 140, 0.4); /* Changed from #282c34 */
   z-index: 0; /* Lower z-index when in home section so it appears behind */
 }
 
@@ -338,11 +353,11 @@ section {
   transform: translateY(-50%);
   right: -300px;
   width: 250px;
-  background-color: rgba(40, 44, 52, 0.65); /* More transparent */
+  background-color: rgba(140, 140, 140, 0.65); /* Changed from #282c34 */
   backdrop-filter: blur(12px); /* Increased blur for frosted glass effect */
   -webkit-backdrop-filter: blur(12px); /* For Safari support */
   border-radius: 20px; /* Fully rounded corners on all sides for floating effect */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); /* Softer, more spread out shadow */
+  box-shadow: 0 8px 32px rgba(128, 128, 128, 0.15);
   z-index: 1000;
   transition: all 0.3s ease-in-out;
   padding: 25px;

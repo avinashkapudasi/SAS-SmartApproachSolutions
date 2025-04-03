@@ -31,7 +31,7 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: #000;
 }
 
 .home-section {
@@ -48,18 +48,18 @@
   color: white;
   overflow: hidden;
   border-radius: 2%; /* Changed from 30px */
-  box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.1);
   margin-top: 0; /* Remove top margin to eliminate gap */
   margin-bottom: 2%; /* Changed from 20px */
-  box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.2);
 }
 
 /* When header is hidden, adjust home section to fill header space too */
-:has(header.hide-header) .home-section {
-  height: calc(100vh + var(--header-height, 0px)); /* Add hidden header height to fill the space */
+/* :has(header.hide-header) .home-section {
+  height: calc(100vh + var(--header-height, 0px)); Add hidden header height to fill the space
   margin-top: 0;
   border-radius: 0; /* Remove border radius at top when header is hidden */
-}
+/* } */
 
 .home-background-image {
   position: absolute;
@@ -99,14 +99,14 @@
 .home-content h2 {
   font-size: 3.5em;
   margin-bottom: 5%;
-  text-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.5);
+  text-shadow: 0.1em 0.1em 0.2em rgba(128, 128, 128, 0.5);
   color: #ffffff;
 }
 
 .home-content p {
   font-size: 1.5em;
   margin-bottom: 5%;
-  text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5);
+  text-shadow: 0.05em 0.05em 0.1em rgba(128, 128, 128, 0.5);
   color: #ffffff;
 }
 
@@ -152,31 +152,31 @@
 
 .cta-button {
   padding: 2% 5%;
-  background-color: #282c34;
+  background-color: #8c8c8c;
   color: white;
   border: none;
   border-radius: 0.3em;
   font-size: 1.1em;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0.25em 0.4em rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25em 0.4em rgba(128, 128, 128, 0.1);
 }
 
 .cta-button:hover {
-  background-color: #3e4451;
+  background-color: #a0a0a0;
   transform: translateY(-3%);
-  box-shadow: 0 0.4em 0.6em rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.4em 0.6em rgba(128, 128, 128, 0.2);
 }
 
 /* Color Variables based on home image */
 :root {
-  --primary-color: #282c34;
-  --secondary-color: #3e4451;
+  --primary-color: #000;
+  --secondary-color: #000;
   --accent-color: #61dafb;
   --light-bg: #f8f9fa;
   --medium-bg: #e9ecef;
-  --gradient-start: rgba(0, 0, 0, 0.2);
-  --gradient-end: rgba(0, 0, 0, 0.7);
+  --gradient-start: rgba(128, 128, 128, 0.2);
+  --gradient-end: rgba(128, 128, 128, 0.7);
 }
 
 /* Add more seamless transitions between sections */
@@ -198,7 +198,7 @@ section {
   position: relative;
   margin: 2% 0; /* Changed from 20px */
   border-radius: 2%; /* Changed from 30px */
-  box-shadow: 0 0.5% 1% rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.05);
   transition: all 0.4s ease; /* Smooth transition for all properties */
   background-attachment: fixed;
   background-position: center;
@@ -208,7 +208,7 @@ section {
 
 /* Add subtle hover effect for sections */
 section:hover {
-  box-shadow: 0 0.8% 1.5% rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.8% 1.5% rgba(128, 128, 128, 0.1);
 }
 
 /* Optional: Add scroll observer animation (needs JavaScript implementation) */
@@ -276,7 +276,7 @@ section h2::after {
 
 /* Section content with improved styling */
 section p {
-  color: var(--secondary-color);
+  color: #000;
   font-size: 1.2em;
   line-height: 1.6;
   max-width: 800px;
@@ -317,14 +317,14 @@ section p {
 
 .about-block h3 {
   font-size: 1.5em;
-  color: var(--primary-color);
+  color: #000;
   margin-bottom: 5%; /* Changed from 15px */
   text-align: center;
 }
 
 .about-block p {
   font-size: 1em;
-  color: var(--secondary-color);
+  color: #000;
   text-align: center;
 }
 
@@ -390,14 +390,14 @@ section p {
 
 .service-block h3 {
   font-size: 1.5em;
-  color: var(--primary-color);
+  color: #000;
   margin-bottom: 5%; /* Changed from 15px */
   text-align: center;
 }
 
 .service-block p {
   font-size: 1em;
-  color: var(--secondary-color);
+  color: #000;
   text-align: center;
 }
 
@@ -471,7 +471,7 @@ section p {
 
 .team-member h3 {
   font-size: 1.5em;
-  color: var(--primary-color);
+  color: #000;
   margin-bottom: 5px;
 }
 
@@ -482,7 +482,7 @@ section p {
 }
 
 .member-desc {
-  color: var(--secondary-color);
+  color: #000;
   font-size: 0.95em;
   margin-bottom: 5%;
 }
@@ -494,7 +494,7 @@ section p {
 }
 
 .member-social a {
-  color: var(--secondary-color);
+  color: #000;
   font-size: 1.2em;
   transition: color 0.3s ease;
 }
@@ -519,6 +519,176 @@ section p {
   .member-image {
     width: 150px;
     height: 150px;
+  }
+}
+
+/* Team Carousel Styles */
+.team-carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  position: relative;
+}
+
+.team-carousel {
+  width: 80%;
+  overflow: hidden;
+  margin: 0 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.team-carousel-inner {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+  width: 100%;
+}
+
+.team-card {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #8c8c8c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background-color: #a8a8a8;
+  transform: scale(1.1);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #d4d4d4;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-indicator.active {
+  background-color: #8c8c8c;
+  transform: scale(1.2);
+}
+
+/* Adjust member styling for carousel */
+.team-card .member-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.team-card .member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-card h3 {
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+.team-card .member-role {
+  color: #8c8c8c;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.team-card .member-desc {
+  text-align: center;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.team-card .member-social {
+  display: flex;
+  gap: 15px;
+}
+
+.team-card .member-social a {
+  color: #8c8c8c;
+  font-size: 22px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.team-card .member-social a:hover {
+  color: #555;
+  transform: translateY(-3px);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .team-carousel {
+    width: 85%;
+    margin: 0 10px;
+  }
+  
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+  
+  .team-card {
+    padding: 20px 15px;
+  }
+  
+  .team-card .member-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-carousel {
+    width: 90%;
+    margin: 0 5px;
+  }
+  
+  .carousel-btn {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .team-card .member-image {
+    width: 100px;
+    height: 100px;
   }
 }
 
@@ -585,8 +755,8 @@ section p {
 
 .input-group label {
   display: block;
-  margin-bottom: 2%; /* Changed from 8px */
-  color: var(--primary-color);
+  margin-bottom: 2%;
+  color: #000;
   font-weight: 500;
 }
 
