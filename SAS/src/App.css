@@ -54,12 +54,15 @@
   box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.2);
 }
 
-/* When header is hidden, adjust home section to fill header space too */
-/* :has(header.hide-header) .home-section {
-  height: calc(100vh + var(--header-height, 0px)); Add hidden header height to fill the space
-  margin-top: 0;
-  border-radius: 0; /* Remove border radius at top when header is hidden */
-/* } */
+/* Home Background Image Carousel */
+.bg-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 .home-background-image {
   position: absolute;
@@ -69,8 +72,23 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  filter: brightness(0.7); /* Darken the image slightly for better text visibility */
+  filter: brightness(0.7);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
 }
+
+.home-background-image.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* When header is hidden, adjust home section to fill header space too */
+/* :has(header.hide-header) .home-section {
+  height: calc(100vh + var(--header-height, 0px)); Add hidden header height to fill the space
+  margin-top: 0;
+  border-radius: 0; /* Remove border radius at top when header is hidden */
+/* } */
 
 .home-section::before {
   content: "";
@@ -589,8 +607,7 @@ section p {
 
 .carousel-indicator {
   width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  height: 1%;
   background-color: #d4d4d4;
   border: none;
   cursor: pointer;
@@ -598,7 +615,7 @@ section p {
 }
 
 .carousel-indicator.active {
-  background-color: #8c8c8c;
+  background-color: #0ab2f5;
   transform: scale(1.2);
 }
 
