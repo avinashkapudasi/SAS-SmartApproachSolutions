@@ -47,9 +47,9 @@
   background-attachment: fixed;
   color: white;
   overflow: hidden;
-  border-radius: 2%; /* Changed from 30px */
+  border-radius: 2%;
   box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.1);
-  margin-top: 0; /* Remove top margin to eliminate gap */
+  margin-top: 0;
   margin-bottom: 2%; /* Changed from 20px */
   box-shadow: 0 0.5% 1% rgba(128, 128, 128, 0.2);
 }
