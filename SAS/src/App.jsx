@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Layout from './Layout'
 import Careers from './components/Careers'
 import homeImage from './assets/home.jpeg' 
+import homeImage2 from './assets/home2.jpeg' // Import second background image
+import homeImage3 from './assets/home3.jpeg' // Import third background image
  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -30,6 +32,9 @@ import { Service } from './types/ServiceDetails';
 function App() {
   const [currentTeamMember, setCurrentTeamMember] = useState(0);
   const autoScrollInterval = useRef(null);
+  const [currentBgIndex, setCurrentBgIndex] = useState(0); // Track current background image
+  const backgroundImages = [homeImage, homeImage2, homeImage3]; // Array of background images
+  const bgTransitionTimer = useRef(null);
 
   useEffect(() => {
     document.title = "Smart Approach Solutions";
@@ -56,6 +61,21 @@ function App() {
       }
     };
   }, [teamMembers]);
+
+  // Background image rotation
+  useEffect(() => {
+    // Set up timer to change background image every 8 seconds
+    bgTransitionTimer.current = setInterval(() => {
+      setCurrentBgIndex(prevIndex => (prevIndex + 1) % backgroundImages.length);
+    }, 8000);
+    
+    // Clean up on unmount
+    return () => {
+      if (bgTransitionTimer.current) {
+        clearInterval(bgTransitionTimer.current);
+      }
+    };
+  }, [backgroundImages.length]);
   
   // Handle carousel navigation
   const navigateCarousel = (direction) => {
@@ -97,11 +117,17 @@ function App() {
         <Route path="/" element={
           <Layout>
             <section id="home" className="home-section">
-              <img 
-                src={homeImage} 
-                alt="Home Background" 
-                className="home-background-image" 
-              />
+              {/* Background image carousel */}
+              <div className="bg-carousel">
+                {backgroundImages.map((image, index) => (
+                  <img 
+                    key={index}
+                    src={image} 
+                    alt={`Home Background ${index + 1}`} 
+                    className={`home-background-image ${index === currentBgIndex ? 'active' : ''}`}
+                  />
+                ))}
+              </div>
               {/* <div className="home-content">
                 
               </div> */}
@@ -165,13 +191,13 @@ function App() {
               <p>Meet our dedicated team members who make everything possible.</p>
              
               <div className="team-carousel-container">
-                <button 
+                {/* <button 
                   className="carousel-btn prev-btn" 
                   aria-label="Previous team member"
                   onClick={() => navigateCarousel('prev')}
                 >
                   <FontAwesomeIcon icon={faChevronLeft} />
-                </button>
+                </button> */}
                 
                 <div className="team-carousel">
                   <div 
@@ -199,13 +225,13 @@ function App() {
                   </div>
                 </div>
                 
-                <button 
+                {/* <button 
                   className="carousel-btn next-btn" 
                   aria-label="Next team member"
                   onClick={() => navigateCarousel('next')}
                 >
                   <FontAwesomeIcon icon={faChevronRight} />
-                </button>
+                </button> */}
               </div>
               
               <div className="carousel-indicators">

@@ -66,7 +66,9 @@ const ContactUs = () => {
             <Phone size={24} />
             <div>
               <h3>Call Us</h3>
-              <a href={`tel:${primaryContact.phone}`}>{primaryContact.phone}</a>
+              <p>
+                Primary: <a href={`tel:${primaryContact.phone}`}>{primaryContact.phone}</a>
+              </p>
               {contactDetails.phone.secondary && (
                 <p className={styles.secondaryContact}>
                   Alternative: <a href={`tel:${contactDetails.phone.secondary}`}>{contactDetails.phone.secondary}</a>
