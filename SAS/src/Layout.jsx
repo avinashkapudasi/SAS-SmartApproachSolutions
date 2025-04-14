@@ -42,6 +42,9 @@ const Layout = ({ children }) => {
       if (scrollTimer) {
         clearTimeout(scrollTimer);
       }
+
+      // Store the current ref value in a local variable for cleanup
+      const currentScrollTimer = scrollTimerRef.current;
       
       // Check if we're in the home section
       const homeSection = document.getElementById('home');
@@ -56,9 +59,9 @@ const Layout = ({ children }) => {
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (currentScrollTimer) {
+        clearTimeout(currentScrollTimer);
+      }
       if (scrollTimerRef.current) {
         clearTimeout(scrollTimerRef.current);
       }

@@ -9,16 +9,7 @@ import homeImage3 from './assets/home3.jpeg' // Import third background image
  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faHeadset, faChartLine, faCogs, 
-  faPhone, faEnvelope, faCommentDots, faHashtag, 
-  faVideo, faSms, 
-  faUsers, 
-  faGears, 
-  faGlobe, 
-  faRobot, 
-  faGraduationCap,
-  faChevronLeft,
-  faChevronRight  
+  faHeadset, faChartLine, faCogs, faGlobe
 } from '@fortawesome/free-solid-svg-icons';//adding for deployment
 import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import ContactUs from './components/ContactUs'
@@ -77,24 +68,7 @@ function App() {
     };
   }, [backgroundImages.length]);
   
-  // Handle carousel navigation
-  const navigateCarousel = (direction) => {
-    // Reset the auto-scroll timer when manually navigating
-    if (autoScrollInterval.current) {
-      clearInterval(autoScrollInterval.current);
-    }
-    
-    if (direction === 'prev') {
-      setCurrentTeamMember(prev => (prev === 0 ? teamMembers.length - 1 : prev - 1));
-    } else {
-      setCurrentTeamMember(prev => (prev + 1) % teamMembers.length);
-    }
-    
-    // Restart auto-scroll
-    autoScrollInterval.current = setInterval(() => {
-      setCurrentTeamMember(prev => (prev + 1) % teamMembers.length);
-    }, 5000);
-  };
+  // Removed unused navigateCarousel function
   
   // Jump to specific team member
   const jumpToTeamMember = (index) => {
