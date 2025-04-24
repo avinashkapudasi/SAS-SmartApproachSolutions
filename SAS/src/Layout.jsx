@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './css/Layout.css';
-import Logo from './assets/sappss.png'; // Import logo image
+import Logo from './assets/SAPPSS.png'; // Import logo image
 
 const Layout = ({ children }) => {
   const [isInHomeSection, setIsInHomeSection] = useState(true);
